@@ -8,21 +8,21 @@
   padding: 35px 0;
 }
 
-.card-header {
+.header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.card-name {
+.name {
   margin: 0;
 }
 
-.card-icon {
+.icon {
   margin-left: 10px;
 }
 
-.card-img {
+.img {
   max-width: 40%;
   height: auto;
 }
