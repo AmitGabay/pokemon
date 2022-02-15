@@ -1,8 +1,9 @@
 .navbar {
-  text-align: left;
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid rgb(186, 184, 184);
   padding: 10px 15px;
-  background-color: #fab3d1;
+  background-color: #97999c;
 }
 
 .brandName {

@@ -1,10 +1,27 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import style from "./Card.module.css";
 
 const Card = (props) => {
+  function randomNum() {
+    return Math.floor(Math.random() * 20) + 1;
+  }
+
+  const [pokemonName, setName] = useState("");
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `https://pokeapi.co/api/v2/pokemon/${randomNum()}`,
+    }).then((res) => {
+      setName(res.data.species.name);
+    });
+  }, []);
+
   return (
     <div className={style.card}>
       <div className={style.header}>
-        <h2 className={style.name}>Pokemon Name</h2>
+        <h2 className={style.name}>{pokemonName}</h2>
         <span className={style.icon}>icon</span>
       </div>
       <img
