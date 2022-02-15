@@ -1,14 +1,14 @@
 import Navbar from "./components/Navbar/Navbar";
 import Search from "./components/Search/Search";
 import Card from "./components/Card/Card";
-import "./App.css";
+import style from "./App.module.css";
 
 function App() {
   return (
-    <div className="App">
+    <div className={style.App}>
       <Navbar />
       <Search />
-      <div className="cards">
+      <div className={style.cards}>
         <Card />
         <Card />
         <Card />

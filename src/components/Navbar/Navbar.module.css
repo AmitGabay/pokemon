@@ -2,8 +2,14 @@
   text-align: left;
   border-bottom: 1px solid rgb(186, 184, 184);
   padding: 10px 15px;
+  background-color: #fab3d1;
 }
 
-.brand-name {
+.brandName {
   font-weight: 500;
+}
+
+.icon {
+  max-width: 20px;
+  margin-right: 5px;
 }

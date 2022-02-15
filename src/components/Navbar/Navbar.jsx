@@ -1,9 +1,11 @@
-import "./Navbar.css";
+import style from "./Navbar.module.css";
+import pokeball from "../../assets/pokeball.png";
 
 const Navbar = (props) => {
   return (
-    <nav className="navbar">
-      <span className="brand-name">Pokémon</span>
+    <nav className={style.navbar}>
+      <img src={pokeball} className={style.icon}></img>
+      <span className={style.brandName}>Pokémon</span>
     </nav>
   );
 };
