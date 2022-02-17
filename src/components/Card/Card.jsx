@@ -6,6 +6,18 @@ function randomNum() {
   return Math.floor(Math.random() * 898) + 1;
 }
 
+function importAll(r) {
+  let images = {};
+  r.keys().forEach((item, index) => {
+    images[item.replace("./", "")] = r(item);
+  });
+  return images;
+}
+
+const images = importAll(
+  require.context("../../assets", false, /\.(png|jpe?g|svg)$/)
+);
+
 const Card = (props) => {
   const [pokemonName, setName] = useState("");
   const [pokemonType, setType] = useState([]);
@@ -30,7 +42,11 @@ const Card = (props) => {
         <h2 className={style.name}>{pokemonName}</h2>
         <div className={style.icon}>
           {pokemonType.map((type) => (
-            <span>{type}</span>
+            <img
+              className={style.iconpic}
+              src={images[`${type}.png`]}
+              alt="type pic"
+            ></img>
           ))}
         </div>
       </div>

@@ -25,9 +25,9 @@
 
 .icon {
   display: flex;
-  flex-direction: column;
+  gap: 5px;
   position: absolute;
-  margin-left: 270px;
+  margin-left: 290px;
 }
 
 .img {
@@ -41,4 +41,9 @@
 
 .abilities {
   margin: 5px;
+}
+
+.iconpic {
+  border-radius: 100%;
+  max-width: 25px;
 }
