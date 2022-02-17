@@ -5,8 +5,10 @@
   margin: 35px 50px;
   border: 10px solid rgb(247, 223, 13);
   border-radius: 4px;
-  padding: 10px 0 120px 0;
+  padding: 10px 0 10px 0;
   background-color: antiquewhite;
+  width: 400px;
+  height: auto;
 }
 
 .header {
@@ -18,13 +20,25 @@
 
 .name {
   margin: 0;
+  text-transform: capitalize;
 }
 
 .icon {
-  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-left: 270px;
 }
 
 .img {
-  max-width: 50%;
+  width: 150px;
   height: auto;
+}
+.ability {
+  display: flex;
+  flex-direction: column;
+}
+
+.abilities {
+  margin: 5px;
 }
