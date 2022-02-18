@@ -10,7 +10,7 @@ const Search = (props) => {
 
   function pokemonSearch(event) {
     event.preventDefault();
-    console.log(pokemon);
+    props.setPokemons([pokemon]);
   }
 
   return (
