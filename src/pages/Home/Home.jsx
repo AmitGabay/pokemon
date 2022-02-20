@@ -9,7 +9,7 @@ function randomNum() {
 }
 
 function Home() {
-  const [pokemons, setPokemons] = useState(new Array(3).fill());
+  const [pokemons, setPokemons] = useState(new Array(6).fill());
 
   return (
     <div className={style.Home}>

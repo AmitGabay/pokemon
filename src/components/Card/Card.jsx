@@ -19,6 +19,7 @@ const Card = (props) => {
   const [pokemonType, setType] = useState([]);
   const [pokemonImg, setImg] = useState("");
   const [pokemonAbility, setAbility] = useState([]);
+  const [pokemonEvolve, setEvolve] = useState("");
 
   useEffect(() => {
     axios({
@@ -29,6 +30,19 @@ const Card = (props) => {
       setType(res.data.types.map((type) => type.type.name));
       setImg(res.data.sprites.front_default);
       setAbility(res.data.abilities.map((ability) => ability.ability.name));
+      axios({
+        method: "get",
+        url: `${res.data.species.url}`,
+      }).then((res) => {
+        console.log(res.data.evolution_chain.url);
+        axios({
+          method: "get",
+          url: `${res.data.evolution_chain.url}`,
+        }).then((res) => {
+          setEvolve(res.data.chain.evolves_to[0].species.name);
+          console.log(res.data.chain.evolves_to[0].species.name);
+        });
+      });
     });
   }, [props.pokemon]);
 
@@ -47,11 +61,19 @@ const Card = (props) => {
         </div>
       </div>
       <img className={style.img} src={pokemonImg} alt="pic" />
-      <div className={style.ability}>
-        <h4 className={style.abilities}>Abilities:</h4>
-        {pokemonAbility.map((ability) => (
-          <span>{ability}</span>
-        ))}
+      <div className={style.info}>
+        <div className={style.abilities}>
+          <h4>Abilities:</h4>
+          {pokemonAbility.map((ability) => (
+            <span>{ability}</span>
+          ))}
+        </div>
+        {pokemonEvolve && (
+          <div className={style.evolve}>
+            <h4>Evolve to:</h4>
+            <span>{pokemonEvolve}</span>
+          </div>
+        )}
       </div>
     </div>
   );

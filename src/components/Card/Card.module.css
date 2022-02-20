@@ -2,20 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 35px 50px;
+  margin: 35px 40px;
   border: 10px solid rgb(247, 223, 13);
   border-radius: 4px;
-  padding: 10px 0 10px 0;
+  padding: 10px 20px;
   background-color: antiquewhite;
   width: 400px;
   height: auto;
+  box-sizing: border-box;
 }
 
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
-  min-width: 80%;
+  width: 100%;
 }
 
 .name {
@@ -26,24 +28,40 @@
 .icon {
   display: flex;
   gap: 5px;
-  position: absolute;
-  margin-left: 290px;
+}
+
+.iconpic {
+  border-radius: 100%;
+  max-width: 25px;
 }
 
 .img {
   width: 150px;
   height: auto;
 }
-.ability {
-  display: flex;
-  flex-direction: column;
+
+h4 {
+  margin-bottom: 5px;
 }
 
 .abilities {
-  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.iconpic {
-  border-radius: 100%;
-  max-width: 25px;
+.info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.evolve {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+span {
+  text-transform: capitalize;
 }
