@@ -1,13 +1,19 @@
 import Navbar from "../../components/Navbar/Navbar";
 import Card from "../../components/Card/Card";
-// import style from "./Favorites.module.css";
+import style from "./Favorites.module.css";
 
-function Favorites(props) {
+function Favorites({ favorites, setFavorites }) {
   return (
-    <div>
+    <div className={style.Favorites}>
       <Navbar />
-      <div>
-        <Card pokemon={props.pokemon} />
+      <div className={style.cards}>
+        {favorites.map((favorite) => (
+          <Card
+            pokemon={favorite}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        ))}
       </div>
     </div>
   );

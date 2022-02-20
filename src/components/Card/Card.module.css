@@ -40,7 +40,7 @@
   height: auto;
 }
 
-h4 {
+.card h4 {
   margin-bottom: 5px;
 }
 
@@ -56,12 +56,22 @@ h4 {
   width: 100%;
 }
 
+.favorite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .evolve {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-span {
+.card span {
   text-transform: capitalize;
+}
+.star {
+  width: 30px;
+  align-self: flex-end;
 }
