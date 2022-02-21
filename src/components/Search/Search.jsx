@@ -1,7 +1,7 @@
 import { useState } from "react";
 import style from "./Search.module.css";
 
-const Search = ({ setPokemons }) => {
+const Search = ({ setPokemons, setFetchedPokemons }) => {
   const [pokemon, setPokemon] = useState("");
 
   function pokemonName(event) {
@@ -10,6 +10,7 @@ const Search = ({ setPokemons }) => {
 
   function pokemonSearch(event) {
     event.preventDefault();
+    setFetchedPokemons([]);
     setPokemons([pokemon.toLowerCase()]);
   }
 

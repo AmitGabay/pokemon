@@ -2,16 +2,23 @@ import Navbar from "../../components/Navbar/Navbar";
 import Card from "../../components/Card/Card";
 import style from "./Favorites.module.css";
 
-function Favorites({ favorites, setFavorites }) {
+function Favorites({ favorites, setFavorites, pokemons, setPokemons }) {
   return (
     <div className={style.Favorites}>
       <Navbar />
       <div className={style.cards}>
-        {favorites.map((favorite) => (
+        {favorites.map((pokemon) => (
           <Card
-            pokemon={favorite}
+            key={pokemon.name}
+            name={pokemon.name}
+            type={pokemon.type}
+            img={pokemon.img}
+            ability={pokemon.ability}
+            evolve={pokemon.evolve}
             favorites={favorites}
             setFavorites={setFavorites}
+            pokemons={pokemons}
+            setPokemons={setPokemons}
           />
         ))}
       </div>

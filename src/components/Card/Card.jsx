@@ -13,31 +13,37 @@ const images = importAll(
 );
 
 const Card = ({
-  pokemonName,
-  pokemonType,
-  pokemonImg,
-  pokemonAbility,
-  pokemonEvolve,
+  name,
+  type,
+  img,
+  ability,
+  evolve,
   favorites,
   setFavorites,
+  setPokemons,
 }) => {
-  function addToFavorite(event) {
-    event.preventDefault();
-    if (favorites.includes(pokemonName)) {
-      setFavorites((prevValue) => prevValue.filter((v) => v !== pokemonName));
-    } else {
-      setFavorites((prevValue) => [...prevValue, pokemonName]);
-    }
+  function addToFavorite() {
+    // if (favorites.includes(pokemonName)) {
+    //   setFavorites((prevValue) => prevValue.filter((v) => v !== pokemonName));
+    //   setPokemons([]);
+    // } else {
+    setFavorites((prevValue) => [
+      ...prevValue,
+      { name, type, img, ability, evolve },
+    ]);
+    setPokemons([]);
+    // }
   }
 
   return (
     <div className={style.card}>
       <div className={style.header}>
-        <h2 className={style.name}>{pokemonName}</h2>
+        <h2 className={style.name}>{name}</h2>
         <div className={style.icon}>
-          {pokemonType.map((type) => (
+          {type.map((type) => (
             <img
               key={type}
+              title={type}
               className={style.iconpic}
               src={images[`${type}.png`]}
               alt="type pic"
@@ -45,11 +51,11 @@ const Card = ({
           ))}
         </div>
       </div>
-      <img className={style.img} src={pokemonImg} alt="pic" />
+      <img className={style.img} src={img} alt="pic" />
       <div className={style.info}>
         <div className={style.abilities}>
           <h4>Abilities:</h4>
-          {pokemonAbility.map((ability) => (
+          {ability.map((ability) => (
             <span key={ability}>{ability}</span>
           ))}
         </div>
@@ -57,17 +63,17 @@ const Card = ({
           <img
             className={style.star}
             src={
-              favorites.includes(pokemonName)
+              favorites.find((favorites) => favorites.name === name)
                 ? images[`star_yellow.svg`]
                 : images[`star_black.svg`]
             }
             alt="star"
             onClick={addToFavorite}
           />
-          {pokemonEvolve && (
+          {evolve && (
             <div className={style.evolve}>
               <h4>Evolve to:</h4>
-              <span>{pokemonEvolve}</span>{" "}
+              <span>{evolve}</span>{" "}
             </div>
           )}
         </div>

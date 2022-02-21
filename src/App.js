@@ -9,23 +9,31 @@ function randomNum() {
 }
 
 function App() {
-  const [pokemons, setPokemons] = useState(
+  const [pokemon, setPokemon] = useState(
     new Array(6).fill().map(() => randomNum())
   );
   const [favorites, setFavorites] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
 
   return (
     <Switch className={style.App}>
       <Route exact path="/">
         <Home
-          pokemons={pokemons}
-          setPokemons={setPokemons}
+          pokemon={pokemon}
+          setPokemon={setPokemon}
           favorites={favorites}
           setFavorites={setFavorites}
+          pokemons={pokemons}
+          setPokemons={setPokemons}
         />
       </Route>
       <Route path="/favorites">
-        <Favorites favorites={favorites} setFavorites={setFavorites} />
+        <Favorites
+          favorites={favorites}
+          setFavorites={setFavorites}
+          pokemons={pokemons}
+          setPokemons={setPokemons}
+        />
       </Route>
     </Switch>
   );
