@@ -20,19 +20,17 @@ const Card = ({
   evolve,
   favorites,
   setFavorites,
-  setPokemons,
 }) => {
   function addToFavorite() {
-    // if (favorites.includes(pokemonName)) {
-    //   setFavorites((prevValue) => prevValue.filter((v) => v !== pokemonName));
-    //   setPokemons([]);
-    // } else {
-    setFavorites((prevValue) => [
-      ...prevValue,
-      { name, type, img, ability, evolve },
-    ]);
-    setPokemons([]);
-    // }
+    const pokemon = favorites.find((favorites) => favorites.name === name);
+    if (pokemon) {
+      setFavorites((prevValue) => prevValue.filter((v) => v !== pokemon));
+    } else {
+      setFavorites((prevValue) => [
+        ...prevValue,
+        { name, type, img, ability, evolve },
+      ]);
+    }
   }
 
   return (
@@ -72,7 +70,7 @@ const Card = ({
           />
           {evolve && (
             <div className={style.evolve}>
-              <h4>Evolve to:</h4>
+              <h4>Evolves to:</h4>
               <span>{evolve}</span>{" "}
             </div>
           )}

@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router";
 import { useState } from "react";
 import Home from "./pages/Home/Home";
 import Favorites from "./pages/Favorites/Favorites";
+import Navbar from "./components/Navbar/Navbar";
 import style from "./App.module.css";
 
 function randomNum() {
@@ -9,33 +10,28 @@ function randomNum() {
 }
 
 function App() {
-  const [pokemon, setPokemon] = useState(
+  const [pokemons, setPokemons] = useState(
     new Array(6).fill().map(() => randomNum())
   );
   const [favorites, setFavorites] = useState([]);
-  const [pokemons, setPokemons] = useState([]);
 
   return (
-    <Switch className={style.App}>
-      <Route exact path="/">
-        <Home
-          pokemon={pokemon}
-          setPokemon={setPokemon}
-          favorites={favorites}
-          setFavorites={setFavorites}
-          pokemons={pokemons}
-          setPokemons={setPokemons}
-        />
-      </Route>
-      <Route path="/favorites">
-        <Favorites
-          favorites={favorites}
-          setFavorites={setFavorites}
-          pokemons={pokemons}
-          setPokemons={setPokemons}
-        />
-      </Route>
-    </Switch>
+    <>
+      <Navbar />
+      <Switch className={style.App}>
+        <Route exact path="/">
+          <Home
+            pokemons={pokemons}
+            setPokemons={setPokemons}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        </Route>
+        <Route path="/favorites">
+          <Favorites favorites={favorites} setFavorites={setFavorites} />
+        </Route>
+      </Switch>
+    </>
   );
 }
 

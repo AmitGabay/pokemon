@@ -1,22 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../../components/Navbar/Navbar";
 import Search from "../../components/Search/Search";
 import Card from "../../components/Card/Card";
 import style from "./Home.module.css";
 
-function Home({
-  pokemon,
-  setPokemon,
-  favorites,
-  setFavorites,
-  pokemons,
-  setPokemons,
-}) {
+function Home({ pokemons, setPokemons, favorites, setFavorites }) {
   const [fetchedPokemons, setFetchedPokemons] = useState([]);
 
   useEffect(() => {
-    pokemon.forEach((pokemon) =>
+    pokemons.forEach((pokemon) =>
       axios({
         method: "get",
         url: `https://pokeapi.co/api/v2/pokemon/${pokemon}`,
@@ -47,13 +39,12 @@ function Home({
         });
       })
     );
-  }, [pokemon]);
+  }, [pokemons]);
 
   return (
     <div className={style.Home}>
-      <Navbar />
       <Search
-        setPokemons={setPokemon}
+        setPokemons={setPokemons}
         setFetchedPokemons={setFetchedPokemons}
       />
       <div className={style.cards}>
@@ -67,8 +58,6 @@ function Home({
             evolve={pokemon.evolve}
             favorites={favorites}
             setFavorites={setFavorites}
-            pokemons={pokemons}
-            setPokemons={setPokemons}
           />
         ))}
       </div>

@@ -74,4 +74,5 @@
 .star {
   width: 30px;
   align-self: flex-end;
+  cursor: pointer;
 }

@@ -8,10 +8,19 @@
 
 .brandName {
   font-weight: 500;
-  margin: 0 10px;
-  color: black;
+  margin: 0 5px;
   cursor: pointer;
+  color: black;
   text-decoration: none;
+  opacity: 0.6;
+}
+
+.selected {
+  opacity: 1;
+}
+
+.brandName:hover {
+  opacity: 1;
 }
 
 .icon {
