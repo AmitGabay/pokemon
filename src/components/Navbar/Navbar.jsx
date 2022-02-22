@@ -1,11 +1,11 @@
 import style from "./Navbar.module.css";
-import pokeball from "../../assets/pokeball.png";
+import pokeball1 from "../../assets/pokeball1.png";
 import { NavLink } from "react-router-dom";
 
 const Navbar = (props) => {
   return (
     <nav className={style.navbar}>
-      <img src={pokeball} className={style.icon} alt="pokeball"></img>
+      <img src={pokeball1} className={style.icon} alt="pokeball"></img>
       <NavLink
         to="/"
         exact

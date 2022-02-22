@@ -67,13 +67,18 @@ const Card = ({
         </div>
         <div className={style.favorite}>
           <img
-            className={style.star}
+            className={style.pokeball}
             src={
               favorites.find((favorites) => favorites.name === name)
-                ? images[`star_yellow.svg`]
-                : images[`star_black.svg`]
+                ? images[`pokeballfill.png`]
+                : images[`pokeball2.png`]
             }
-            alt="star"
+            title={
+              favorites.find((favorites) => favorites.name === name)
+                ? "Let Go!"
+                : "Catch!"
+            }
+            alt="pokeball"
             onClick={addToFavorite}
           />
           {evolve && (

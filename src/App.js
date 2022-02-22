@@ -6,8 +6,16 @@ import Favorites from "./pages/Favorites/Favorites";
 import Navbar from "./components/Navbar/Navbar";
 import style from "./App.module.css";
 
+const numbers = [];
+
 function randomNum() {
-  return Math.floor(Math.random() * 898) + 1;
+  let randomnumber;
+  do {
+    randomnumber = Math.floor(Math.random() * 898) + 1;
+  } while (numbers.includes(randomnumber));
+  numbers.push(randomnumber);
+  console.log(numbers);
+  return randomnumber;
 }
 
 function App() {
