@@ -14,7 +14,9 @@ function App() {
   const [pokemons, setPokemons] = useState(
     new Array(6).fill().map(() => randomNum())
   );
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.favorites || "[]")
+  );
 
   return (
     <>
@@ -28,11 +30,11 @@ function App() {
             setFavorites={setFavorites}
           />
         </Route>
-        <Route path="/:evolve">
-          <PokemonInfo favorites={favorites} setFavorites={setFavorites} />
-        </Route>
         <Route path="/favorites">
           <Favorites favorites={favorites} setFavorites={setFavorites} />
+        </Route>
+        <Route path="/pokemon/:evolve">
+          <PokemonInfo favorites={favorites} setFavorites={setFavorites} />
         </Route>
       </Switch>
     </>

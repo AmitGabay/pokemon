@@ -43,9 +43,14 @@ export const getPokemon = async (pokemon) => {
   const {
     data: { chain },
   } = await axios.get(`${evolution_chain.url}`);
-  let evolve = "";
-  if (chain.evolves_to[0]) {
+  let evolve;
+  if (chain.evolves_to[0] && chain.species.name === name) {
     evolve = chain.evolves_to[0].species.name;
+  } else if (
+    chain.evolves_to[0]?.species.name === name &&
+    chain.evolves_to[0].evolves_to[0]
+  ) {
+    evolve = chain.evolves_to[0].evolves_to[0].species.name;
   }
 
   return { name, type, img, ability, evolve };

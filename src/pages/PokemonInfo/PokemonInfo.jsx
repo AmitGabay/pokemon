@@ -12,7 +12,7 @@ function PokemonInfo({ favorites, setFavorites }) {
   useEffect(() => {
     getPokemon(evolve).then((pokemon) => setFetchedPokemon(pokemon));
   }, [evolve]);
-  console.log(favorites);
+
   return (
     <div className={style.Home}>
       <div className={style.cards}>
