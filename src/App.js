@@ -1,6 +1,7 @@
 import { Switch, Route } from "react-router";
 import { useState } from "react";
 import Home from "./pages/Home/Home";
+import PokemonInfo from "./pages/PokemonInfo/PokemonInfo";
 import Favorites from "./pages/Favorites/Favorites";
 import Navbar from "./components/Navbar/Navbar";
 import style from "./App.module.css";
@@ -26,6 +27,9 @@ function App() {
             favorites={favorites}
             setFavorites={setFavorites}
           />
+        </Route>
+        <Route path="/:evolve">
+          <PokemonInfo favorites={favorites} setFavorites={setFavorites} />
         </Route>
         <Route path="/favorites">
           <Favorites favorites={favorites} setFavorites={setFavorites} />

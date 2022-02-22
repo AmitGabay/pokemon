@@ -70,6 +70,7 @@
 
 .card span {
   text-transform: capitalize;
+  text-decoration: none;
 }
 .star {
   width: 30px;

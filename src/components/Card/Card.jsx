@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
 function importAll(r) {
@@ -71,7 +72,9 @@ const Card = ({
           {evolve && (
             <div className={style.evolve}>
               <h4>Evolves to:</h4>
-              <span>{evolve}</span>{" "}
+              <Link to={`/${evolve}`}>
+                <span>{evolve}</span>
+              </Link>
             </div>
           )}
         </div>
