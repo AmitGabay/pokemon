@@ -8,15 +8,25 @@ import style from "./App.module.css";
 
 const numbers = [];
 
+// const randomNum = () => Math.floor(Math.random() * 898) + 1;
+
 function randomNum() {
-  let randomnumber;
-  do {
-    randomnumber = Math.floor(Math.random() * 898) + 1;
-  } while (numbers.includes(randomnumber));
-  numbers.push(randomnumber);
-  console.log(numbers);
-  return randomnumber;
+  let randomnumber = Math.floor(Math.random() * 898) + 1;
+  return (
+    numbers.includes(randomnumber) ? randomNum() : numbers.push(randomnumber),
+    randomnumber
+  );
 }
+
+// function randomNum() {
+//   let randomnumber;
+//   do {
+//     randomnumber = Math.floor(Math.random() * 898) + 1;
+//   } while (numbers.includes(randomnumber));
+//   numbers.push(randomnumber);
+//   console.log(numbers);
+//   return randomnumber;
+// }
 
 function App() {
   const [pokemons, setPokemons] = useState(
