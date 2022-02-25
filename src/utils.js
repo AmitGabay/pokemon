@@ -33,11 +33,11 @@ export const getPokemon = async (pokemon) => {
   );
   const name = data.species.name;
   const type = data.types.map((type) => type.type.name);
-  const img = data.sprites.front_default;
+  const img = data.sprites.other.home.front_default;
   const ability = data.abilities.map((ability) => ability.ability.name);
 
   const {
-    data: { evolution_chain },
+    data: { evolution_chain, is_legendary },
   } = await axios.get(`${data.species.url}`);
 
   const {
@@ -53,5 +53,5 @@ export const getPokemon = async (pokemon) => {
     evolve = chain.evolves_to[0].evolves_to[0].species.name;
   }
 
-  return { name, type, img, ability, evolve };
+  return { name, type, img, ability, evolve, legendary: is_legendary };
 };

@@ -38,6 +38,7 @@ function Home({ pokemons, setPokemons, favorites, setFavorites }) {
               img={pokemon.img}
               ability={pokemon.ability}
               evolve={pokemon.evolve}
+              legendary={pokemon.legendary}
               favorites={favorites}
               setFavorites={setFavorites}
             />

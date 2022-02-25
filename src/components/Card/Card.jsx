@@ -19,6 +19,7 @@ const Card = ({
   img,
   ability,
   evolve,
+  legendary,
   favorites,
   setFavorites,
 }) => {
@@ -34,7 +35,7 @@ const Card = ({
     } else {
       const updatedFavorites = [
         ...favorites,
-        { name, type, img, ability, evolve },
+        { name, type, img, ability, evolve, legendary },
       ];
       setFavorites(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -42,7 +43,12 @@ const Card = ({
   }
 
   return (
-    <div className={style.card}>
+    <div
+      className={style.card}
+      style={{
+        border: `10px solid ${legendary ? "#d8d8d8" : "rgb(247, 223, 13)"}`,
+      }}
+    >
       <div className={style.header}>
         <h2 className={style.name}>{name}</h2>
         <div className={style.icon}>
