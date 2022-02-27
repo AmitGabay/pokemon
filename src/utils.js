@@ -33,7 +33,7 @@ export const getPokemon = async (pokemon) => {
   );
   const name = data.species.name;
   const type = data.types.map((type) => type.type.name);
-  const img = data.sprites.other.home.front_default;
+  const img = data.sprites.other["official-artwork"].front_default;
   const ability = data.abilities.map((ability) => ability.ability.name);
 
   const {

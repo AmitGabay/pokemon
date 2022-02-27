@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import Search from "../../components/Search/Search";
 import Card from "../../components/Card/Card";
+import Spinner from "../../components/Spinner/Spinner";
 import style from "./Home.module.css";
 import { getPokemon } from "../../utils";
 
 function Home({ pokemons, setPokemons, favorites, setFavorites }) {
   const [fetchedPokemons, setFetchedPokemons] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     pokemons.forEach((pokemon) =>
@@ -15,35 +17,45 @@ function Home({ pokemons, setPokemons, favorites, setFavorites }) {
     );
   }, [pokemons]);
 
+  useEffect(() => {
+    if (fetchedPokemons.length === pokemons.length) {
+      setIsLoading(false);
+    }
+  }, [fetchedPokemons]);
+
   return (
     <div className={style.Home}>
       <Search
         setPokemons={setPokemons}
         setFetchedPokemons={setFetchedPokemons}
       />
-      <div className={style.cards}>
-        {fetchedPokemons
-          .sort((a, b) => {
-            if (a.name < b.name) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-          .map((pokemon) => (
-            <Card
-              key={pokemon.name}
-              name={pokemon.name}
-              type={pokemon.type}
-              img={pokemon.img}
-              ability={pokemon.ability}
-              evolve={pokemon.evolve}
-              legendary={pokemon.legendary}
-              favorites={favorites}
-              setFavorites={setFavorites}
-            />
-          ))}
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div className={style.cards}>
+          {fetchedPokemons
+            .sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              } else {
+                return 1;
+              }
+            })
+            .map((pokemon) => (
+              <Card
+                key={pokemon.name}
+                name={pokemon.name}
+                type={pokemon.type}
+                img={pokemon.img}
+                ability={pokemon.ability}
+                evolve={pokemon.evolve}
+                legendary={pokemon.legendary}
+                favorites={favorites}
+                setFavorites={setFavorites}
+              />
+            ))}
+        </div>
+      )}
     </div>
   );
 }
