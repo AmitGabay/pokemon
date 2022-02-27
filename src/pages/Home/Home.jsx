@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import Search from "../../components/Search/Search";
 import Card from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/Spinner";
 import style from "./Home.module.css";
 import { getPokemon } from "../../utils";
 
-function Home({ pokemons, setPokemons, favorites, setFavorites }) {
+function Home({ pokemons, favorites, setFavorites }) {
   const [fetchedPokemons, setFetchedPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,10 +24,6 @@ function Home({ pokemons, setPokemons, favorites, setFavorites }) {
 
   return (
     <div className={style.Home}>
-      <Search
-        setPokemons={setPokemons}
-        setFetchedPokemons={setFetchedPokemons}
-      />
       {isLoading ? (
         <Spinner />
       ) : (
@@ -44,6 +39,7 @@ function Home({ pokemons, setPokemons, favorites, setFavorites }) {
             .map((pokemon) => (
               <Card
                 key={pokemon.name}
+                id={pokemon.id}
                 name={pokemon.name}
                 type={pokemon.type}
                 img={pokemon.img}

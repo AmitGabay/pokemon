@@ -14,6 +14,7 @@ const images = importAll(
 );
 
 const Card = ({
+  id,
   name,
   type,
   img,
@@ -22,21 +23,20 @@ const Card = ({
   legendary,
   favorites,
   setFavorites,
+  refreshFavorites,
 }) => {
   function addToFavorite() {
-    const pokemon = favorites.find((favorites) => favorites.name === name);
+    const pokemon = favorites.find((favorite) => favorite === id);
 
     if (pokemon) {
       const updatedFavorites = favorites.filter(
         (favorite) => favorite !== pokemon
       );
       setFavorites(updatedFavorites);
+      refreshFavorites();
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     } else {
-      const updatedFavorites = [
-        ...favorites,
-        { name, type, img, ability, evolve, legendary },
-      ];
+      const updatedFavorites = [...favorites, id];
       setFavorites(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     }
@@ -50,6 +50,7 @@ const Card = ({
       }}
     >
       <div className={style.header}>
+        <h5>{`#${id}`}</h5>
         <h2 className={style.name}>{name}</h2>
         <div className={style.icon}>
           {type.map((type) => (
@@ -75,12 +76,12 @@ const Card = ({
           <img
             className={style.pokeball}
             src={
-              favorites.find((favorites) => favorites.name === name)
+              favorites.find((favorites) => favorites === id)
                 ? images[`pokeballfill.png`]
                 : images[`pokeball2.png`]
             }
             title={
-              favorites.find((favorites) => favorites.name === name)
+              favorites.find((favorites) => favorites === id)
                 ? "Let Go!"
                 : "Catch!"
             }

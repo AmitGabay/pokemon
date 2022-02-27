@@ -31,6 +31,7 @@ export const getPokemon = async (pokemon) => {
   const { data } = await axios.get(
     `https://pokeapi.co/api/v2/pokemon/${pokemon}`
   );
+  const id = data.id;
   const name = data.species.name;
   const type = data.types.map((type) => type.type.name);
   const img = data.sprites.other["official-artwork"].front_default;
@@ -53,5 +54,5 @@ export const getPokemon = async (pokemon) => {
     evolve = chain.evolves_to[0].evolves_to[0].species.name;
   }
 
-  return { name, type, img, ability, evolve, legendary: is_legendary };
+  return { id, name, type, img, ability, evolve, legendary: is_legendary };
 };

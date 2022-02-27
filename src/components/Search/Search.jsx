@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import style from "./Search.module.css";
 
-const Search = ({ setPokemons, setFetchedPokemons }) => {
+const Search = () => {
   const [pokemon, setPokemon] = useState("");
+  const history = useHistory();
 
   function pokemonName(event) {
     setPokemon(event.target.value);
@@ -10,12 +12,13 @@ const Search = ({ setPokemons, setFetchedPokemons }) => {
 
   function pokemonSearch(event) {
     event.preventDefault();
-    setFetchedPokemons([]);
-    setPokemons([pokemon.toLowerCase()]);
+    setPokemon([pokemon.toLowerCase()]);
+    history.push(`/pokemon/${pokemon}`);
+    setPokemon("");
   }
 
   return (
-    <form onSubmit={pokemonSearch}>
+    <form onSubmit={pokemonSearch} className={style.container}>
       <input
         type="search"
         placeholder="Find a Pokemon"

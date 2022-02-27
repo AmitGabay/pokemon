@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import PokemonInfo from "./pages/PokemonInfo/PokemonInfo";
 import Favorites from "./pages/Favorites/Favorites";
 import Navbar from "./components/Navbar/Navbar";
+import Search from "./components/Search/Search";
 import style from "./App.module.css";
 
 const numbers = [];
@@ -39,6 +40,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <Search />
       <Switch className={style.App}>
         <Route exact path="/">
           <Home
@@ -51,7 +53,7 @@ function App() {
         <Route path="/favorites">
           <Favorites favorites={favorites} setFavorites={setFavorites} />
         </Route>
-        <Route path="/pokemon/:evolve">
+        <Route path="/pokemon/:pick">
           <PokemonInfo favorites={favorites} setFavorites={setFavorites} />
         </Route>
       </Switch>
