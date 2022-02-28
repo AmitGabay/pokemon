@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card/Card";
-import style from "./PokemonInfo.module.css";
+import style from "./Favorite_Pokemon.module.css";
 import { getPokemon } from "../../utils";
 
-function PokemonInfo() {
+function Favorite_Pokemon({ favorites, setFavorites }) {
   const [fetchedPokemon, setFetchedPokemon] = useState();
 
   const { pick } = useParams();
@@ -25,6 +25,8 @@ function PokemonInfo() {
             ability={fetchedPokemon.ability}
             evolve={fetchedPokemon.evolve}
             legendary={fetchedPokemon.legendary}
+            favorites={favorites}
+            setFavorites={setFavorites}
           />
         )}
       </div>
@@ -32,4 +34,4 @@ function PokemonInfo() {
   );
 }
 
-export default PokemonInfo;
+export default Favorite_Pokemon;

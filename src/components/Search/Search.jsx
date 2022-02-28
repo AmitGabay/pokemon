@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import style from "./Search.module.css";
 
-const Search = () => {
+const Search = ({ favorites }) => {
   const [pokemon, setPokemon] = useState("");
   const history = useHistory();
 
@@ -13,7 +13,12 @@ const Search = () => {
   function pokemonSearch(event) {
     event.preventDefault();
     setPokemon([pokemon.toLowerCase()]);
-    history.push(`/pokemon/${pokemon}`);
+    favorites.find(
+      (favorite) => pokemon === favorite.name || pokemon === favorite.id
+    )
+      ? history.push(`/favorites/${pokemon}`)
+      : history.push(`/pokemon/${pokemon}`);
+
     setTimeout(() => {
       setPokemon("");
     }, 300);

@@ -26,7 +26,7 @@ const Card = ({
   refreshFavorites,
 }) => {
   function addToFavorite() {
-    const pokemon = favorites.find((favorite) => favorite === id);
+    const pokemon = favorites.find((favorite) => favorite.id === id);
 
     if (pokemon) {
       const updatedFavorites = favorites.filter(
@@ -36,7 +36,7 @@ const Card = ({
       refreshFavorites();
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     } else {
-      const updatedFavorites = [...favorites, id];
+      const updatedFavorites = [...favorites, { id, name }];
       setFavorites(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     }
@@ -73,21 +73,23 @@ const Card = ({
           ))}
         </div>
         <div className={style.favorite}>
-          <img
-            className={style.pokeball}
-            src={
-              favorites.find((favorites) => favorites === id)
-                ? images[`pokeballfill.png`]
-                : images[`pokeball2.png`]
-            }
-            title={
-              favorites.find((favorites) => favorites === id)
-                ? "Let Go!"
-                : "Catch!"
-            }
-            alt="pokeball"
-            onClick={addToFavorite}
-          />
+          {favorites && (
+            <img
+              className={style.pokeball}
+              src={
+                favorites.find((favorite) => favorite.id === id)
+                  ? images[`pokeballfill.png`]
+                  : images[`pokeball2.png`]
+              }
+              title={
+                favorites.find((favorite) => favorite.id === id)
+                  ? "Let Go!"
+                  : "Catch!"
+              }
+              alt="pokeball"
+              onClick={addToFavorite}
+            />
+          )}
           {evolve && (
             <div className={style.evolve}>
               <h4>Evolves to:</h4>

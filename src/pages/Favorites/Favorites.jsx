@@ -10,7 +10,7 @@ function Favorites({ favorites, setFavorites }) {
 
   useEffect(() => {
     favorites.forEach((pokemon) =>
-      getPokemon(pokemon).then((pokemon) =>
+      getPokemon(pokemon.id).then((pokemon) =>
         setFetchedPokemons((prev) => [...prev, pokemon])
       )
     );
