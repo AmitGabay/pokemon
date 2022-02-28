@@ -14,7 +14,9 @@ const Search = () => {
     event.preventDefault();
     setPokemon([pokemon.toLowerCase()]);
     history.push(`/pokemon/${pokemon}`);
-    setPokemon("");
+    setTimeout(() => {
+      setPokemon("");
+    }, 300);
   }
 
   return (

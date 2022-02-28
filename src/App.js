@@ -31,11 +31,15 @@ function randomNum() {
 
 function App() {
   const [pokemons, setPokemons] = useState(
-    new Array(6).fill().map(() => randomNum())
+    new Array(1).fill().map(() => randomNum())
   );
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.favorites || "[]")
   );
+
+  function resetArray() {
+    setPokemons(new Array(1).fill().map(() => randomNum()));
+  }
 
   return (
     <>
@@ -48,6 +52,7 @@ function App() {
             setPokemons={setPokemons}
             favorites={favorites}
             setFavorites={setFavorites}
+            resetArray={resetArray}
           />
         </Route>
         <Route path="/favorites">

@@ -4,7 +4,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import style from "./Home.module.css";
 import { getPokemon } from "../../utils";
 
-function Home({ pokemons, favorites, setFavorites }) {
+function Home({ pokemons, favorites, setFavorites, resetArray }) {
   const [fetchedPokemons, setFetchedPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,34 +22,45 @@ function Home({ pokemons, favorites, setFavorites }) {
     }
   }, [fetchedPokemons]);
 
+  function newPokemon() {
+    setFetchedPokemons([]);
+    resetArray();
+    setIsLoading(true);
+  }
+
   return (
     <div className={style.Home}>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className={style.cards}>
-          {fetchedPokemons
-            .sort((a, b) => {
-              if (a.name < b.name) {
-                return -1;
-              } else {
-                return 1;
-              }
-            })
-            .map((pokemon) => (
-              <Card
-                key={pokemon.name}
-                id={pokemon.id}
-                name={pokemon.name}
-                type={pokemon.type}
-                img={pokemon.img}
-                ability={pokemon.ability}
-                evolve={pokemon.evolve}
-                legendary={pokemon.legendary}
-                favorites={favorites}
-                setFavorites={setFavorites}
-              />
-            ))}
+        <div className={style.container}>
+          <div className={style.cards}>
+            {fetchedPokemons
+              .sort((a, b) => {
+                if (a.id < b.id) {
+                  return -1;
+                } else {
+                  return 1;
+                }
+              })
+              .map((pokemon) => (
+                <Card
+                  key={pokemon.name}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  type={pokemon.type}
+                  img={pokemon.img}
+                  ability={pokemon.ability}
+                  evolve={pokemon.evolve}
+                  legendary={pokemon.legendary}
+                  favorites={favorites}
+                  setFavorites={setFavorites}
+                />
+              ))}
+          </div>
+          <button className={style.btn} onClick={newPokemon}>
+            New Pokemon!
+          </button>
         </div>
       )}
     </div>

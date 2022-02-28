@@ -24,6 +24,7 @@ function PokemonInfo({ favorites, setFavorites }) {
             img={fetchedPokemon.img}
             ability={fetchedPokemon.ability}
             evolve={fetchedPokemon.evolve}
+            legendary={fetchedPokemon.legendary}
             favorites={favorites}
             setFavorites={setFavorites}
           />
