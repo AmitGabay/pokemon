@@ -15,9 +15,15 @@ const Search = ({ favorites }) => {
     event.preventDefault();
     setPokemon([pokemon.toLowerCase()]);
     if (location.pathname === "/favorites") {
-      favorites.find((favorite) => pokemon === (favorite.name || favorite.id))
+      favorites.find(
+        (favorite) => pokemon === favorite.name || +pokemon === favorite.id
+      )
         ? history.push(`/favorites/${pokemon}`)
-        : alert(`You Have Not Catched ${pokemon} Yet`);
+        : alert(
+            `You have not catched ${pokemon[0].toUpperCase()}${pokemon.slice(
+              1
+            )} yet`
+          );
     } else {
       history.push(`/pokemon/${pokemon}`);
     }

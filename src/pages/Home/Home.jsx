@@ -29,11 +29,11 @@ function Home({ pokemons, favorites, setFavorites, resetArray }) {
   }
 
   return (
-    <div className={style.Home}>
+    <div>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className={style.container}>
+        <>
           <div className={style.cards}>
             {fetchedPokemons
               .sort((a, b) => {
@@ -58,10 +58,12 @@ function Home({ pokemons, favorites, setFavorites, resetArray }) {
                 />
               ))}
           </div>
-          <button className={style.btn} onClick={newPokemon}>
-            New Pokemon!
-          </button>
-        </div>
+          <div className={style.container}>
+            <button className={style.btn} onClick={newPokemon}>
+              New Pokemon!
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
