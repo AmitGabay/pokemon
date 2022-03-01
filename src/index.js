@@ -4,6 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 
+if ("serviceWorker" in navigator) {
+  // register service worker
+  navigator.serviceWorker.register("service-worker.js");
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
