@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import style from "./Search.module.css";
 
 const Search = ({ favorites }) => {
   const [pokemon, setPokemon] = useState("");
   const history = useHistory();
+  const location = useLocation();
 
   function pokemonName(event) {
     setPokemon(event.target.value);
@@ -13,12 +14,13 @@ const Search = ({ favorites }) => {
   function pokemonSearch(event) {
     event.preventDefault();
     setPokemon([pokemon.toLowerCase()]);
-    favorites.find(
-      (favorite) => pokemon === favorite.name || pokemon === favorite.id
-    )
-      ? history.push(`/favorites/${pokemon}`)
-      : history.push(`/pokemon/${pokemon}`);
-
+    if (location.pathname === "/favorites") {
+      favorites.find((favorite) => pokemon === (favorite.name || favorite.id))
+        ? history.push(`/favorites/${pokemon}`)
+        : alert(`You Have Not Catched ${pokemon} Yet`);
+    } else {
+      history.push(`/pokemon/${pokemon}`);
+    }
     setTimeout(() => {
       setPokemon("");
     }, 300);
