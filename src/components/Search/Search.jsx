@@ -13,19 +13,19 @@ const Search = ({ favorites }) => {
 
   function pokemonSearch(event) {
     event.preventDefault();
-    setPokemon([pokemon.toLowerCase()]);
     if (location.pathname === "/favorites") {
       favorites.find(
-        (favorite) => pokemon === favorite.name || +pokemon === favorite.id
+        (favorite) =>
+          pokemon.toLowerCase() === favorite.name || +pokemon === favorite.id
       )
-        ? history.push(`/favorites/${pokemon}`)
+        ? history.push(`/favorites/${pokemon.toLowerCase()}`)
         : alert(
             `You have not catched ${pokemon[0].toUpperCase()}${pokemon.slice(
               1
             )} yet`
           );
     } else {
-      history.push(`/pokemon/${pokemon}`);
+      history.push(`/pokemon/${pokemon.toLowerCase()}`);
     }
     setTimeout(() => {
       setPokemon("");

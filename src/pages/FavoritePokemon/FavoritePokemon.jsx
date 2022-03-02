@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card/Card";
-import style from "./Favorite_Pokemon.module.css";
+import style from "./FavoritePokemon.module.css";
 import { getPokemon } from "../../utils";
 
-function Favorite_Pokemon({ favorites, setFavorites }) {
+function FavoritePokemon({ favorites, setFavorites }) {
   const [fetchedPokemon, setFetchedPokemon] = useState();
 
   const { pick } = useParams();
@@ -34,4 +34,4 @@ function Favorite_Pokemon({ favorites, setFavorites }) {
   );
 }
 
-export default Favorite_Pokemon;
+export default FavoritePokemon;

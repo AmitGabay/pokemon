@@ -1,12 +1,13 @@
 import { Switch, Route } from "react-router";
 import { useState } from "react";
 import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
 import PokemonInfo from "./pages/PokemonInfo/PokemonInfo";
 import Favorites from "./pages/Favorites/Favorites";
 import Navbar from "./components/Navbar/Navbar";
 import Search from "./components/Search/Search";
 import style from "./App.module.css";
-import Favorite_Pokemon from "./pages/Favorite_Pokemon/Favorite_Pokemon";
+import FavoritePokemon from "./pages/FavoritePokemon/FavoritePokemon";
 
 const numbers = [];
 
@@ -37,6 +38,7 @@ function App() {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.favorites || "[]")
   );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function resetArray() {
     setPokemons(new Array(1).fill().map(() => randomNum()));
@@ -46,26 +48,34 @@ function App() {
     <>
       <Navbar />
       <Search favorites={favorites} />
-      <Switch className={style.App}>
-        <Route exact path="/">
-          <Home
-            pokemons={pokemons}
-            setPokemons={setPokemons}
-            favorites={favorites}
-            setFavorites={setFavorites}
-            resetArray={resetArray}
-          />
-        </Route>
-        <Route exact path="/favorites">
-          <Favorites favorites={favorites} setFavorites={setFavorites} />
-        </Route>
-        <Route path="/pokemon/:pick">
-          <PokemonInfo />
-        </Route>
-        <Route path="/favorites/:pick">
-          <Favorite_Pokemon favorites={favorites} setFavorites={setFavorites} />
-        </Route>
-      </Switch>
+      {isLoggedIn ? (
+        <Switch className={style.App}>
+          <Route exact path="/">
+            <Home
+              pokemons={pokemons}
+              setPokemons={setPokemons}
+              favorites={favorites}
+              setFavorites={setFavorites}
+              resetArray={resetArray}
+            />
+          </Route>
+
+          <Route exact path="/favorites">
+            <Favorites favorites={favorites} setFavorites={setFavorites} />
+          </Route>
+          <Route path="/pokemon/:pick">
+            <PokemonInfo />
+          </Route>
+          <Route path="/favorites/:pick">
+            <FavoritePokemon
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
+          </Route>
+        </Switch>
+      ) : (
+        <Login />
+      )}
     </>
   );
 }
