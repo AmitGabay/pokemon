@@ -1,6 +1,6 @@
 {
   "short_name": "Pokemon App",
-  "name": "Pokemon App by Amit Gabay",
+  "name": "Pokemon App",
   "start_url": "index.html",
   "scope": "./",
   "icons": [
