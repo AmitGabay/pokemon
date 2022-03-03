@@ -38,7 +38,7 @@ function App() {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.favorites || "[]")
   );
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.user);
 
   function resetArray() {
     setPokemons(new Array(1).fill().map(() => randomNum()));
@@ -74,7 +74,7 @@ function App() {
           </Route>
         </Switch>
       ) : (
-        <Login />
+        <Login setIsLoggedIn={setIsLoggedIn} />
       )}
     </>
   );

@@ -60,8 +60,7 @@
 
 .signup {
   display: flex;
-  align-items: flex-start;
-  gap: 5px;
+  align-items: baseline;
 }
 
 .login h4 {
@@ -69,6 +68,8 @@
 }
 
 .link {
-  text-decoration: none;
   cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  font-size: 16px;
 }
