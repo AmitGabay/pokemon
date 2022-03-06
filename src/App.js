@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import PokemonInfo from "./pages/PokemonInfo/PokemonInfo";
@@ -38,6 +39,15 @@ function App() {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.favorites || "[]")
   );
+
+  useEffect(() => {
+    const getFavorites = async () => {
+      const { data } = await axios.get("http://localhost:5000/pokemons");
+      setFavorites(data);
+    };
+    getFavorites();
+  }, []);
+
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.user);
 
   function resetArray() {

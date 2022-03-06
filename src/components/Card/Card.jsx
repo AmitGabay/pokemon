@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
 import style from "./Card.module.css";
 
@@ -35,10 +36,12 @@ const Card = ({
       setFavorites(updatedFavorites);
       refreshFavorites();
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      axios.post("http://localhost:5000/pokemons", updatedFavorites);
     } else {
       const updatedFavorites = [...favorites, { id, name }];
       setFavorites(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      axios.post("http://localhost:5000/pokemons", updatedFavorites);
     }
   }
 
