@@ -44,9 +44,9 @@ function App() {
 
   useEffect(() => {
     const getFavorites = async () => {
-      const { data } = await axios.get("http://localhost:5000/pokemons", {
-        body: userId,
-      });
+      const { data } = await axios.get(
+        `http://localhost:5000/pokemons?userId=${userId}`
+      );
       setFavorites(data);
     };
     getFavorites();

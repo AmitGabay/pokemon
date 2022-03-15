@@ -28,6 +28,7 @@ const Card = ({
 }) => {
   function addToFavorite() {
     const pokemon = favorites.find((favorite) => favorite.id === id);
+    const userId = localStorage.user;
 
     if (pokemon) {
       const updatedFavorites = favorites.filter(
@@ -36,12 +37,18 @@ const Card = ({
       setFavorites(updatedFavorites);
       refreshFavorites();
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-      axios.post("http://localhost:5000/pokemons", updatedFavorites);
+      axios.post("http://localhost:5000/pokemons", {
+        userId,
+        pokemons: updatedFavorites,
+      });
     } else {
       const updatedFavorites = [...favorites, { id, name }];
       setFavorites(updatedFavorites);
       localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-      axios.post("http://localhost:5000/pokemons", updatedFavorites);
+      axios.post("http://localhost:5000/pokemons", {
+        userId,
+        pokemons: updatedFavorites,
+      });
     }
   }
 

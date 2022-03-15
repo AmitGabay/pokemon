@@ -28,7 +28,7 @@ const Login = ({ setUserId }) => {
       password,
     });
     setUserId(data.userId);
-    localStorage.setItem("user", JSON.stringify(data.userId));
+    localStorage.setItem("user", data.userId);
   };
 
   return (
