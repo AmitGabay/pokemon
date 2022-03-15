@@ -1,29 +1,35 @@
 import { useState } from "react";
 import style from "./Login.module.css";
 import pokeball1 from "../../assets/pokeball1.png";
+import axios from "axios";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = ({ setUserId }) => {
   const [mode, setMode] = useState("Login");
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   function changeMode() {
     mode === "Login" ? setMode("Sign Up") : setMode("Login");
   }
 
-  function typeUserName(event) {
-    setUserName(event.target.value);
+  function typeEmail(event) {
+    setEmail(event.target.value);
   }
 
   function typePassword(event) {
     setPassword(event.target.value);
   }
 
-  function onSubmit(event) {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    localStorage.setItem("user", JSON.stringify(userName));
-    setIsLoggedIn(true);
-  }
+
+    const { data } = await axios.post("http://localhost:5000/register", {
+      email,
+      password,
+    });
+    setUserId(data.userId);
+    localStorage.setItem("user", JSON.stringify(data.userId));
+  };
 
   return (
     <div className={style.login}>
@@ -39,11 +45,11 @@ const Login = ({ setIsLoggedIn }) => {
           <input
             className={style.input}
             type="text"
-            placeholder="Username"
-            value={userName}
-            name="uname"
+            placeholder="email"
+            value={email}
+            name="email"
             required
-            onChange={typeUserName}
+            onChange={typeEmail}
           ></input>
           <input
             className={style.input}

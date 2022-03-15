@@ -40,15 +40,17 @@ function App() {
     JSON.parse(localStorage.favorites || "[]")
   );
 
+  const [userId, setUserId] = useState(localStorage.user);
+
   useEffect(() => {
     const getFavorites = async () => {
-      const { data } = await axios.get("http://localhost:5000/pokemons");
+      const { data } = await axios.get("http://localhost:5000/pokemons", {
+        body: userId,
+      });
       setFavorites(data);
     };
     getFavorites();
-  }, []);
-
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.user);
+  }, [userId]);
 
   function resetArray() {
     setPokemons(new Array(1).fill().map(() => randomNum()));
@@ -58,7 +60,7 @@ function App() {
     <>
       <Navbar />
       <Search favorites={favorites} />
-      {isLoggedIn ? (
+      {userId ? (
         <Switch className={style.App}>
           <Route exact path="/">
             <Home
@@ -84,7 +86,7 @@ function App() {
           </Route>
         </Switch>
       ) : (
-        <Login setIsLoggedIn={setIsLoggedIn} />
+        <Login userId={userId} setUserId={setUserId} />
       )}
     </>
   );
