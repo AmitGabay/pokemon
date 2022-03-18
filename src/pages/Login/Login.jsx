@@ -22,14 +22,21 @@ const Login = ({ setUserId }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
-    const { data } = await axios.post("http://localhost:5000/register", {
-      mode,
-      email,
-      password,
-    });
-    setUserId(data.userId);
-    localStorage.setItem("user", data.userId);
+    try {
+      const { data } = await axios.post("http://localhost:5000/register", {
+        mode,
+        email,
+        password,
+      });
+      setUserId(data.userId);
+      localStorage.setItem("user", data.userId);
+    } catch ({ response }) {
+      if (response.status === 409) {
+        alert("This email is already registered!");
+      } else if (response.status === 403) {
+        alert("Incorrect email or password. Try again!");
+      }
+    }
   };
 
   return (

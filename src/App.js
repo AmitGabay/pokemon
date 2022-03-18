@@ -36,14 +36,13 @@ function App() {
   const [pokemons, setPokemons] = useState(
     new Array(1).fill().map(() => randomNum())
   );
-  const [favorites, setFavorites] = useState(
-    JSON.parse(localStorage.favorites || "[]")
-  );
+  const [favorites, setFavorites] = useState([]);
 
   const [userId, setUserId] = useState(localStorage.user);
 
   function logout() {
     setUserId("");
+    localStorage.clear();
   }
 
   useEffect(() => {

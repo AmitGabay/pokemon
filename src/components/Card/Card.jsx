@@ -36,7 +36,7 @@ const Card = ({
       );
       setFavorites(updatedFavorites);
       refreshFavorites();
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
       axios.post("http://localhost:5000/pokemons", {
         userId,
         pokemons: updatedFavorites,
@@ -44,7 +44,7 @@ const Card = ({
     } else {
       const updatedFavorites = [...favorites, { id, name }];
       setFavorites(updatedFavorites);
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
       axios.post("http://localhost:5000/pokemons", {
         userId,
         pokemons: updatedFavorites,
