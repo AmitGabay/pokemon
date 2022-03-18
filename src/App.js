@@ -42,7 +42,13 @@ function App() {
 
   const [userId, setUserId] = useState(localStorage.user);
 
+  function logout() {
+    setUserId("");
+  }
+
   useEffect(() => {
+    if (!userId) return;
+
     const getFavorites = async () => {
       const { data } = await axios.get(
         `http://localhost:5000/pokemons?userId=${userId}`
@@ -58,7 +64,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar userId={userId} logout={logout} />
       <Search favorites={favorites} />
       {userId ? (
         <Switch className={style.App}>

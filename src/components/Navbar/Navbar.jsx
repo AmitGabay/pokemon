@@ -2,7 +2,7 @@ import style from "./Navbar.module.css";
 import pokeball1 from "../../assets/pokeball1.png";
 import { NavLink } from "react-router-dom";
 
-const Navbar = (props) => {
+const Navbar = ({ userId, logout }) => {
   return (
     <nav className={style.navbar}>
       <img src={pokeball1} className={style.icon} alt="pokeball"></img>
@@ -21,6 +21,7 @@ const Navbar = (props) => {
       >
         My Pokémons
       </NavLink>
+      {userId && <button onClick={logout}>Logout</button>}
     </nav>
   );
 };
