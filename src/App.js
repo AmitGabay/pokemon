@@ -50,7 +50,7 @@ function App() {
 
     const getFavorites = async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/pokemons?userId=${userId}`
+        `${process.env.REACT_APP_SERVER_URL}/pokemons?userId=${userId}`
       );
       setFavorites(data);
     };

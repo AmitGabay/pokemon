@@ -23,11 +23,14 @@ const Login = ({ setUserId }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:5000/register", {
-        mode,
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/register`,
+        {
+          mode,
+          email,
+          password,
+        }
+      );
       setUserId(data.userId);
       localStorage.setItem("user", data.userId);
     } catch ({ response }) {
