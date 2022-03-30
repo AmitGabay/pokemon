@@ -37,7 +37,7 @@ const Card = ({
       setFavorites(updatedFavorites);
       refreshFavorites();
 
-      axios.post("http://localhost:5000/pokemons", {
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
         userId,
         pokemons: updatedFavorites,
       });
@@ -45,7 +45,7 @@ const Card = ({
       const updatedFavorites = [...favorites, { id, name }];
       setFavorites(updatedFavorites);
 
-      axios.post("http://localhost:5000/pokemons", {
+      axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
         userId,
         pokemons: updatedFavorites,
       });
