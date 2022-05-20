@@ -28,7 +28,6 @@ const Card = ({
 }) => {
   function addToFavorite() {
     const pokemon = favorites.find((favorite) => favorite.id === id);
-    const userId = localStorage.user;
 
     if (pokemon) {
       const updatedFavorites = favorites.filter(
@@ -38,7 +37,6 @@ const Card = ({
       refreshFavorites();
 
       axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
-        userId,
         pokemons: updatedFavorites,
       });
     } else {
@@ -46,7 +44,6 @@ const Card = ({
       setFavorites(updatedFavorites);
 
       axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
-        userId,
         pokemons: updatedFavorites,
       });
     }

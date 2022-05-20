@@ -3,7 +3,7 @@ import style from "./Login.module.css";
 import pokeball1 from "../../assets/pokeball1.png";
 import axios from "axios";
 
-const Login = ({ setUserId }) => {
+const Login = ({ setUserLoggedIn }) => {
   const [mode, setMode] = useState("Login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,8 +31,9 @@ const Login = ({ setUserId }) => {
           password,
         }
       );
-      setUserId(data.userId);
-      localStorage.setItem("user", data.userId);
+      setUserLoggedIn(true);
+      localStorage.setItem("user", data.token);
+      axios.defaults.headers.Authorization = data.token;
     } catch ({ response }) {
       if (response.status === 409) {
         alert("This email is already registered!");

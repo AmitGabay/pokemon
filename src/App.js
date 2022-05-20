@@ -38,24 +38,25 @@ function App() {
   );
   const [favorites, setFavorites] = useState([]);
 
-  const [userId, setUserId] = useState(localStorage.user);
+  const [userLoggedIn, setUserLoggedIn] = useState(Boolean(localStorage.user));
 
   function logout() {
-    setUserId("");
+    setUserLoggedIn(false);
     localStorage.clear();
+    delete axios.defaults.headers.Authorization;
   }
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userLoggedIn) return;
 
     const getFavorites = async () => {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/pokemons?userId=${userId}`
+        `${process.env.REACT_APP_SERVER_URL}/pokemons`
       );
       setFavorites(data);
     };
     getFavorites();
-  }, [userId]);
+  }, [userLoggedIn]);
 
   function resetArray() {
     setPokemons(new Array(1).fill().map(() => randomNum()));
@@ -63,9 +64,9 @@ function App() {
 
   return (
     <>
-      <Navbar userId={userId} logout={logout} />
+      <Navbar userLoggedIn={userLoggedIn} logout={logout} />
       <Search favorites={favorites} />
-      {userId ? (
+      {userLoggedIn ? (
         <Switch className={style.App}>
           <Route exact path="/">
             <Home
@@ -91,7 +92,7 @@ function App() {
           </Route>
         </Switch>
       ) : (
-        <Login userId={userId} setUserId={setUserId} />
+        <Login userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
       )}
     </>
   );
