@@ -9,7 +9,7 @@ const Login = ({ setUserLoggedIn }) => {
   const [password, setPassword] = useState("");
 
   function changeMode() {
-    mode === "Login" ? setMode("Sign Up") : setMode("Login");
+    mode === "Login" ? setMode("Signup") : setMode("Login");
   }
 
   function typeEmail(event) {
@@ -24,7 +24,7 @@ const Login = ({ setUserLoggedIn }) => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/register`,
+        `${process.env.REACT_APP_SERVER_URL}/${mode}`,
         {
           mode,
           email,
