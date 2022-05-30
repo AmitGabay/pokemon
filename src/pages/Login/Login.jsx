@@ -33,7 +33,7 @@ const Login = ({ setUserLoggedIn }) => {
       );
       setUserLoggedIn(true);
       localStorage.setItem("user", data.token);
-      axios.defaults.headers.Authorization = data.token;
+      if (data.token) axios.defaults.headers.Authorization = data.token;
     } catch ({ response }) {
       if (response.status === 409) {
         alert("This email is already registered!");
