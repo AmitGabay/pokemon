@@ -5,7 +5,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import Card from "../../components/Card/Card";
 import style from "./Favorites.module.css";
 
-function Favorites({ favorites, setFavorites }) {
+const Favorites = ({ favorites, setFavorites }) => {
   const [fetchedPokemons, setFetchedPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -51,6 +51,6 @@ function Favorites({ favorites, setFavorites }) {
         ))}
     </div>
   );
-}
+};
 
 export default Favorites;

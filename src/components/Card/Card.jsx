@@ -1,14 +1,15 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 import style from "./Card.module.css";
 
-function importAll(r) {
+const importAll = (r) => {
   let images = {};
   r.keys().forEach((item, index) => {
     images[item.replace("./", "")] = r(item);
   });
   return images;
-}
+};
 
 const images = importAll(
   require.context("../../assets", false, /\.(png|jpe?g|svg)$/)
@@ -26,7 +27,7 @@ const Card = ({
   setFavorites,
   refreshFavorites,
 }) => {
-  function addToFavorite() {
+  const addToFavorite = () => {
     const pokemon = favorites.find((favorite) => favorite.id === id);
 
     if (pokemon) {
@@ -47,7 +48,7 @@ const Card = ({
         pokemons: updatedFavorites,
       });
     }
-  }
+  };
 
   return (
     <div
@@ -59,6 +60,7 @@ const Card = ({
       <div className={style.header}>
         <h5>{`#${id}`}</h5>
         <h2 className={style.name}>{name}</h2>
+
         <div className={style.icon}>
           {type.map((type) => (
             <img
@@ -71,7 +73,9 @@ const Card = ({
           ))}
         </div>
       </div>
+
       <img className={style.img} src={img} alt="pic" />
+
       <div className={style.info}>
         <div className={style.abilities}>
           <h4>Abilities:</h4>
@@ -79,6 +83,7 @@ const Card = ({
             <span key={ability}>{ability}</span>
           ))}
         </div>
+
         <div className={style.favorite}>
           {favorites && (
             <img
@@ -97,6 +102,7 @@ const Card = ({
               onClick={addToFavorite}
             />
           )}
+
           {evolve && (
             <div className={style.evolve}>
               <h4>Evolves to:</h4>

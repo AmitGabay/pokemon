@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+
 import style from "./Search.module.css";
 
 const Search = ({ favorites }) => {
@@ -7,12 +8,13 @@ const Search = ({ favorites }) => {
   const history = useHistory();
   const location = useLocation();
 
-  function pokemonName(event) {
+  const pokemonName = (event) => {
     setPokemon(event.target.value);
-  }
+  };
 
-  function pokemonSearch(event) {
+  const pokemonSearch = (event) => {
     event.preventDefault();
+
     if (location.pathname === "/favorites") {
       favorites.find(
         (favorite) =>
@@ -27,10 +29,9 @@ const Search = ({ favorites }) => {
     } else {
       history.push(`/pokemon/${pokemon.toLowerCase()}`);
     }
-    setTimeout(() => {
-      setPokemon("");
-    }, 300);
-  }
+
+    setTimeout(() => setPokemon(""), 300);
+  };
 
   return (
     <form onSubmit={pokemonSearch} className={style.container}>

@@ -5,7 +5,7 @@ import { getPokemon } from "../../utils";
 import Card from "../../components/Card/Card";
 import style from "./FavoritePokemon.module.css";
 
-function FavoritePokemon({ favorites, setFavorites }) {
+const FavoritePokemon = ({ favorites, setFavorites }) => {
   const [fetchedPokemon, setFetchedPokemon] = useState();
 
   const { pick } = useParams();
@@ -33,6 +33,6 @@ function FavoritePokemon({ favorites, setFavorites }) {
       </div>
     </div>
   );
-}
+};
 
 export default FavoritePokemon;

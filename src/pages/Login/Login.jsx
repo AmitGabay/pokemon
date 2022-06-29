@@ -1,24 +1,27 @@
 import { useState } from "react";
-import style from "./Login.module.css";
-import pokeball1 from "../../assets/pokeball1.png";
 import axios from "axios";
 
+import pokeball1 from "../../assets/pokeball1.png";
+import style from "./Login.module.css";
+
+const [LOGIN, SIGNUP] = ["Login", "Signup"];
+
 const Login = ({ setUserLoggedIn }) => {
-  const [mode, setMode] = useState("Login");
+  const [mode, setMode] = useState(LOGIN);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function changeMode() {
-    mode === "Login" ? setMode("Signup") : setMode("Login");
-  }
+  const changeMode = () => {
+    mode === LOGIN ? setMode(SIGNUP) : setMode(LOGIN);
+  };
 
-  function typeEmail(event) {
+  const typeEmail = (event) => {
     setEmail(event.target.value);
-  }
+  };
 
-  function typePassword(event) {
+  const typePassword = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -49,10 +52,12 @@ const Login = ({ setUserLoggedIn }) => {
         <div className={style.header}>
           <h5>Hello!</h5>
           <h2 className={style.name}>{mode}</h2>
+
           <div className={style.icon}>
             <img src={pokeball1} className={style.icon} alt="pokeball"></img>
           </div>
         </div>
+
         <form className={style.form} onSubmit={onSubmit}>
           <input
             className={style.input}
@@ -62,7 +67,8 @@ const Login = ({ setUserLoggedIn }) => {
             name="email"
             required
             onChange={typeEmail}
-          ></input>
+          />
+
           <input
             className={style.input}
             type="password"
@@ -72,15 +78,17 @@ const Login = ({ setUserLoggedIn }) => {
             minLength="8"
             required
             onChange={typePassword}
-          ></input>
+          />
+
           <button className={style.btn} type="submit">
             {mode}
           </button>
         </form>
+
         <div className={style.signup}>
-          <h4>{mode === "Login" ? "Not a member?" : "Already a member?"}</h4>
+          <h4>{mode === LOGIN ? "Not a member?" : "Already a member?"}</h4>
           <button className={style.link} onClick={changeMode}>
-            {mode === "Login" ? "Signup now" : "Login"}
+            {mode === LOGIN ? "Signup now" : LOGIN}
           </button>
         </div>
       </div>
