@@ -15,7 +15,7 @@ Legendary pokemon are differentiated with the silver border.
 ![connect_legendary](https://user-images.githubusercontent.com/82440072/177137762-b14d5028-a907-4f30-8e8d-c5693d2cfc37.png)
 
 To get another random pokemon you should click on the "New Pokemon" button.
-<br>
+
 By clicking the pokeball, you are able to catch the pokemon and add it to your collection. 
 Another click will set the pokemon free.
 
@@ -25,4 +25,6 @@ You can only capture pokemon you encounter, not the ones you searched for.
 
 ![search_screen](https://user-images.githubusercontent.com/82440072/177139514-2531cfe2-bfb0-4eb7-823a-979eb3eb2605.png)
 
-<strong>Lets see if you can catch them all:</strong> https://pokemon-act.pages.dev/
+<strong>Lets see if you can catch them all!</strong> 
+<br>
+https://pokemon-act.pages.dev
