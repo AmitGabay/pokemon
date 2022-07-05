@@ -4,26 +4,26 @@
 
 Going into the app you will see a login or signup page.
 
-![signup_screen](https://user-images.githubusercontent.com/82440072/177138688-bad64bc1-912d-420e-bde6-9f1ee5dc0807.png)
+![signup_screen](https://user-images.githubusercontent.com/82440072/177282289-c3d9c13b-9bc8-4cfe-ac28-49948a18109f.png)
 
 Once logged in a random pokemon will appear.
 
-![connect_regular](https://user-images.githubusercontent.com/82440072/177137128-e9678695-9de5-4c35-bda0-264dbdde3e39.png) 
+![connect_regular](https://user-images.githubusercontent.com/82440072/177282354-f8dbfda7-4e23-494a-89ab-e5e78d98ef4c.png)
 
 Legendary pokemon are differentiated with the silver border.
 
-![connect_legendary](https://user-images.githubusercontent.com/82440072/177137762-b14d5028-a907-4f30-8e8d-c5693d2cfc37.png)
+![connect_legendary](https://user-images.githubusercontent.com/82440072/177282395-79f963fc-8951-4306-8026-b2efeba794bc.png)
 
 To get another random pokemon you should click on the "New Pokemon" button.
 
 By clicking the pokeball, you are able to catch the pokemon and add it to your collection. 
 Another click will set the pokemon free.
 
-![favorites_screen](https://user-images.githubusercontent.com/82440072/177137423-005da08a-256c-4a4f-b35b-a682ebf2705d.png)
+![favorites_screen](https://user-images.githubusercontent.com/82440072/177282434-7c405d93-605c-484d-b1ed-f51c26c67463.png)
 
 You can only capture pokemon you encounter, not the ones you searched for.
 
-![search_screen](https://user-images.githubusercontent.com/82440072/177139514-2531cfe2-bfb0-4eb7-823a-979eb3eb2605.png)
+![search_screen](https://user-images.githubusercontent.com/82440072/177282492-b53d56b1-792b-4fc3-8cea-bd735ad6a571.png)
 
 <strong>Lets see if you can catch them all!</strong> 
 <br>
