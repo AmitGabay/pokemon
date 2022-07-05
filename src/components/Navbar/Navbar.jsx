@@ -22,7 +22,7 @@ const Navbar = ({ userLoggedIn, logout }) => {
         className={style.brandName}
         activeClassName={style.selected}
       >
-        My Pokémons
+        My Pokémon
       </NavLink>
 
       {userLoggedIn && <button onClick={logout}>Logout</button>}
