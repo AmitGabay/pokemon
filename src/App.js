@@ -13,25 +13,17 @@ import style from "./App.module.css";
 
 const randomNum = () => Math.floor(Math.random() * 898) + 1;
 
-// const numbers = [];
-
-/* const randomNum = () => {
-  const randomnumber = Math.floor(Math.random() * 898) + 1;
-
-  if (numbers.includes(randomnumber)) return randomNum();
-
-  numbers.push(randomnumber);
-
-  return randomnumber;
-}; */
-
 const App = () => {
   const [pokemons, setPokemons] = useState(new Array(1).fill().map(randomNum));
   const [favorites, setFavorites] = useState([]);
   const [userLoggedIn, setUserLoggedIn] = useState(Boolean(localStorage.user));
+  const [signup, setSignup] = useState(false);
 
   useEffect(() => {
-    if (!userLoggedIn) return;
+    if (!userLoggedIn) {
+      setFavorites(JSON.parse(localStorage.favorites || "[]"));
+      return;
+    }
 
     const getFavorites = async () => {
       const { data } = await axios(
@@ -42,7 +34,7 @@ const App = () => {
     };
 
     getFavorites();
-  }, [userLoggedIn]);
+  }, [userLoggedIn, signup]);
 
   const logout = () => {
     setUserLoggedIn(false);
@@ -50,39 +42,48 @@ const App = () => {
     delete axios.defaults.headers.Authorization;
   };
 
+  const signin = async () => {
+    await localStorage.clear();
+    setSignup(true);
+  };
+
   const resetArray = () => setPokemons(new Array(1).fill().map(randomNum));
 
   return (
     <>
-      <Navbar userLoggedIn={userLoggedIn} logout={logout} />
+      <Navbar userLoggedIn={userLoggedIn} logout={logout} signin={signin} />
       <Search favorites={favorites} />
+      <Switch className={style.App}>
+        <Route exact path="/">
+          <Home
+            pokemons={pokemons}
+            setPokemons={setPokemons}
+            favorites={favorites}
+            setFavorites={setFavorites}
+            resetArray={resetArray}
+            userLoggedIn={userLoggedIn}
+          />
+        </Route>
 
-      {userLoggedIn ? (
-        <Switch className={style.App}>
-          <Route exact path="/">
-            <Home
-              pokemons={pokemons}
-              setPokemons={setPokemons}
-              favorites={favorites}
-              setFavorites={setFavorites}
-              resetArray={resetArray}
-            />
-          </Route>
-
-          <Route exact path="/favorites">
-            <Favorites favorites={favorites} setFavorites={setFavorites} />
-          </Route>
-          <Route path="/pokemon/:pick">
-            <PokemonInfo />
-          </Route>
-          <Route path="/favorites/:pick">
-            <FavoritePokemon
-              favorites={favorites}
-              setFavorites={setFavorites}
-            />
-          </Route>
-        </Switch>
-      ) : (
+        <Route exact path="/favorites">
+          <Favorites
+            favorites={favorites}
+            setFavorites={setFavorites}
+            userLoggedIn={userLoggedIn}
+          />
+        </Route>
+        <Route path="/pokemon/:pick">
+          <PokemonInfo />
+        </Route>
+        <Route path="/favorites/:pick">
+          <FavoritePokemon
+            favorites={favorites}
+            setFavorites={setFavorites}
+            userLoggedIn={userLoggedIn}
+          />
+        </Route>
+      </Switch>
+      {signup && (
         <Login userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
       )}
     </>
