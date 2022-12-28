@@ -5,26 +5,25 @@ import Spinner from "../../components/Spinner/Spinner";
 import Card from "../../components/Card/Card";
 import style from "./Home.module.css";
 
-const Home = ({ pokemons, favorites, setFavorites, resetArray }) => {
-  const [fetchedPokemons, setFetchedPokemons] = useState([]);
+const randomNum = () => Math.floor(Math.random() * 898) + 1;
+
+const Home = ({ favorites, setFavorites }) => {
+  const [randomPokemon, setRandomPokemon] = useState(randomNum);
+  const [fetchedPokemon, setFetchedPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    pokemons.forEach(async (pokemon) => {
-      const val = await getPokemon(pokemon);
-      setFetchedPokemons((prev) => [...prev, val]);
-    });
-  }, [pokemons]);
-
-  useEffect(() => {
-    if (fetchedPokemons.length === pokemons.length) {
+    const getRandomnPokemon = async () => {
+      setFetchedPokemon(await getPokemon(randomPokemon));
       setIsLoading(false);
-    }
-  }, [fetchedPokemons]);
+    };
 
-  const newPokemon = () => {
-    setFetchedPokemons([]);
-    resetArray();
+    getRandomnPokemon();
+  }, [randomPokemon]);
+
+  const getNewPokemon = () => {
+    setFetchedPokemon([]);
+    setRandomPokemon(randomNum);
     setIsLoading(true);
   };
 
@@ -33,32 +32,24 @@ const Home = ({ pokemons, favorites, setFavorites, resetArray }) => {
   return (
     <>
       <div className={style.cards}>
-        {fetchedPokemons
-          .sort((a, b) => {
-            if (a.id < b.id) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-          .map((pokemon) => (
-            <Card
-              key={pokemon.name}
-              id={pokemon.id}
-              name={pokemon.name}
-              type={pokemon.type}
-              img={pokemon.img}
-              ability={pokemon.ability}
-              evolve={pokemon.evolve}
-              legendary={pokemon.legendary}
-              favorites={favorites}
-              setFavorites={setFavorites}
-            />
-          ))}
+        {fetchedPokemon && (
+          <Card
+            key={fetchedPokemon.name}
+            id={fetchedPokemon.id}
+            name={fetchedPokemon.name}
+            type={fetchedPokemon.type}
+            img={fetchedPokemon.img}
+            ability={fetchedPokemon.ability}
+            evolve={fetchedPokemon.evolve}
+            legendary={fetchedPokemon.legendary}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        )}
       </div>
 
       <div className={style.container}>
-        <button className={style.btn} onClick={newPokemon}>
+        <button className={style.btn} onClick={getNewPokemon}>
           New Pokemon!
         </button>
       </div>

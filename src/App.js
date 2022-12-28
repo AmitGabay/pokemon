@@ -11,13 +11,10 @@ import Search from "./components/Search/Search";
 import FavoritePokemon from "./pages/FavoritePokemon/FavoritePokemon";
 import style from "./App.module.css";
 
-const randomNum = () => Math.floor(Math.random() * 898) + 1;
-
 const App = () => {
-  const [pokemons, setPokemons] = useState(new Array(1).fill().map(randomNum));
   const [favorites, setFavorites] = useState([]);
   const [userLoggedIn, setUserLoggedIn] = useState(Boolean(localStorage.user));
-  const [signup, setSignup] = useState(false);
+  const [login, setLogin] = useState(false);
 
   useEffect(() => {
     if (!userLoggedIn) {
@@ -34,57 +31,61 @@ const App = () => {
     };
 
     getFavorites();
-  }, [userLoggedIn, signup]);
+  }, [userLoggedIn]);
 
   const logout = () => {
     setUserLoggedIn(false);
-    localStorage.clear();
+    localStorage.removeItem("user");
     delete axios.defaults.headers.Authorization;
+    setFavorites(JSON.parse(localStorage.favorites || "[]"));
   };
 
-  const signin = async () => {
-    await localStorage.clear();
-    setSignup(true);
+  const signin = () => {
+    setLogin(true);
   };
-
-  const resetArray = () => setPokemons(new Array(1).fill().map(randomNum));
 
   return (
     <>
-      <Navbar userLoggedIn={userLoggedIn} logout={logout} signin={signin} />
-      <Search favorites={favorites} />
-      <Switch className={style.App}>
-        <Route exact path="/">
-          <Home
-            pokemons={pokemons}
-            setPokemons={setPokemons}
-            favorites={favorites}
-            setFavorites={setFavorites}
-            resetArray={resetArray}
-            userLoggedIn={userLoggedIn}
-          />
-        </Route>
+      <Navbar
+        userLoggedIn={userLoggedIn}
+        logout={logout}
+        signin={signin}
+        login={login}
+      />
+      {login ? (
+        <Login setUserLoggedIn={setUserLoggedIn} setLogin={setLogin} />
+      ) : (
+        <>
+          {" "}
+          <Search favorites={favorites} />
+          <Switch className={style.App}>
+            <Route exact path="/">
+              <Home
+                favorites={favorites}
+                setFavorites={setFavorites}
+                userLoggedIn={userLoggedIn}
+              />
+            </Route>
 
-        <Route exact path="/favorites">
-          <Favorites
-            favorites={favorites}
-            setFavorites={setFavorites}
-            userLoggedIn={userLoggedIn}
-          />
-        </Route>
-        <Route path="/pokemon/:pick">
-          <PokemonInfo />
-        </Route>
-        <Route path="/favorites/:pick">
-          <FavoritePokemon
-            favorites={favorites}
-            setFavorites={setFavorites}
-            userLoggedIn={userLoggedIn}
-          />
-        </Route>
-      </Switch>
-      {signup && (
-        <Login userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />
+            <Route exact path="/favorites">
+              <Favorites
+                favorites={favorites}
+                setFavorites={setFavorites}
+                userLoggedIn={userLoggedIn}
+              />
+            </Route>
+            <Route path="/pokemon/:pick">
+              <PokemonInfo />
+            </Route>
+            <Route path="/favorites/:pick">
+              <FavoritePokemon
+                favorites={favorites}
+                setFavorites={setFavorites}
+                userLoggedIn={userLoggedIn}
+              />
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );

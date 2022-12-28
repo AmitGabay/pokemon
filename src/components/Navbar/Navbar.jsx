@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import pokeball1 from "../../assets/pokeball1.png";
 import style from "./Navbar.module.css";
 
-const Navbar = ({ userLoggedIn, logout, signin }) => {
+const Navbar = ({ userLoggedIn, logout, signin, login }) => {
   return (
     <nav className={style.navbar}>
       <img src={pokeball1} className={style.icon} alt="pokeball"></img>
@@ -25,11 +25,12 @@ const Navbar = ({ userLoggedIn, logout, signin }) => {
         My Pokémon
       </NavLink>
 
-      {userLoggedIn ? (
-        <button onClick={logout}>Logout</button>
-      ) : (
-        <button onClick={signin}>Signup</button>
-      )}
+      {!login &&
+        (userLoggedIn ? (
+          <button onClick={logout}>Logout</button>
+        ) : (
+          <button onClick={signin}>Login</button>
+        ))}
     </nav>
   );
 };

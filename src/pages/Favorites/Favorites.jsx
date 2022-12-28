@@ -10,18 +10,18 @@ const Favorites = ({ favorites, setFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    favorites.forEach(async (pokemon) => {
-      const fetchedPokemon = await getPokemon(pokemon.id);
+    const getFavorites = async () => {
+      const fetched = await Promise.all(
+        favorites.map(({ id }) => getPokemon(id))
+      );
 
-      setFetchedPokemons((prev) => [...prev, fetchedPokemon]);
-    });
-  }, [favorites]);
-
-  useEffect(() => {
-    if (!favorites.length || favorites.length === fetchedPokemons.length) {
+      setFetchedPokemons(fetched);
       setIsLoading(false);
-    }
-  }, [fetchedPokemons, favorites]);
+    };
+
+    if (favorites.length) getFavorites();
+    else setFetchedPokemons([]);
+  }, [favorites]);
 
   const refreshFavorites = () => {
     setFetchedPokemons([]);
