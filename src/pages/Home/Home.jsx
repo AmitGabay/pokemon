@@ -7,7 +7,7 @@ import style from "./Home.module.css";
 
 const randomNum = () => Math.floor(Math.random() * 898) + 1;
 
-const Home = ({ favorites, setFavorites }) => {
+const Home = ({ favorites, setFavorites, userLoggedIn }) => {
   const [randomPokemon, setRandomPokemon] = useState(randomNum);
   const [fetchedPokemon, setFetchedPokemon] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +44,7 @@ const Home = ({ favorites, setFavorites }) => {
             legendary={fetchedPokemon.legendary}
             favorites={favorites}
             setFavorites={setFavorites}
+            userLoggedIn={userLoggedIn}
           />
         )}
       </div>

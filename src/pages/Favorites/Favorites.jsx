@@ -5,7 +5,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import Card from "../../components/Card/Card";
 import style from "./Favorites.module.css";
 
-const Favorites = ({ favorites, setFavorites }) => {
+const Favorites = ({ favorites, setFavorites, userLoggedIn }) => {
   const [fetchedPokemons, setFetchedPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,12 +23,7 @@ const Favorites = ({ favorites, setFavorites }) => {
     else setFetchedPokemons([]);
   }, [favorites]);
 
-  const refreshFavorites = () => {
-    setFetchedPokemons([]);
-    setIsLoading(true);
-  };
-
-  if (isLoading) return <Spinner />;
+  if (isLoading && favorites.length > 0) return <Spinner />;
 
   return (
     <div className={style.cards}>
@@ -46,7 +41,7 @@ const Favorites = ({ favorites, setFavorites }) => {
             legendary={pokemon.legendary}
             favorites={favorites}
             setFavorites={setFavorites}
-            refreshFavorites={refreshFavorites}
+            userLoggedIn={userLoggedIn}
           />
         ))}
     </div>

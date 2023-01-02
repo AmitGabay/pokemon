@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import pokeball1 from "../../assets/pokeball1.png";
@@ -6,25 +7,16 @@ import style from "./Login.module.css";
 
 const [LOGIN, SIGNUP] = ["Login", "Signup"];
 
-const Login = ({ setUserLoggedIn, setLogin }) => {
+const Login = ({ setUserLoggedIn }) => {
   const [mode, setMode] = useState(LOGIN);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const changeMode = () => {
-    mode === LOGIN ? setMode(SIGNUP) : setMode(LOGIN);
-  };
-
-  const typeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const typePassword = (event) => {
-    setPassword(event.target.value);
-  };
+  const navigate = useNavigate();
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/${mode}`,
@@ -37,19 +29,21 @@ const Login = ({ setUserLoggedIn, setLogin }) => {
       setUserLoggedIn(true);
       localStorage.setItem("user", data.token);
       if (data.token) axios.defaults.headers.Authorization = data.token;
-      setLogin(false);
+
       if (mode === SIGNUP && localStorage.getItem("favorites")) {
         await axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
           pokemons: JSON.parse(localStorage.getItem("favorites")),
         });
         localStorage.removeItem("favorites");
       }
+
+      navigate("/");
     } catch ({ response }) {
       if (response.status === 409) {
         alert("This email is already registered!");
       } else if (response.status === 403) {
         alert("Incorrect email or password. Try again!");
-      }
+      } else alert("An error occured. Please try again!");
     }
   };
 
@@ -73,7 +67,7 @@ const Login = ({ setUserLoggedIn, setLogin }) => {
             value={email}
             name="email"
             required
-            onChange={typeEmail}
+            onChange={(event) => setEmail(event.target.value)}
           />
 
           <input
@@ -84,7 +78,7 @@ const Login = ({ setUserLoggedIn, setLogin }) => {
             name="psw"
             minLength="8"
             required
-            onChange={typePassword}
+            onChange={(event) => setPassword(event.target.value)}
           />
 
           <button className={style.btn} type="submit">
@@ -94,7 +88,10 @@ const Login = ({ setUserLoggedIn, setLogin }) => {
 
         <div className={style.signup}>
           <h4>{mode === LOGIN ? "Not a member?" : "Already a member?"}</h4>
-          <button className={style.link} onClick={changeMode}>
+          <button
+            className={style.link}
+            onClick={() => setMode(mode === LOGIN ? SIGNUP : LOGIN)}
+          >
             {mode === LOGIN ? "Signup now" : LOGIN}
           </button>
         </div>

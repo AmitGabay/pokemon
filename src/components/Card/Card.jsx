@@ -5,7 +5,7 @@ import style from "./Card.module.css";
 
 const importAll = (r) => {
   let images = {};
-  r.keys().forEach((item, index) => {
+  r.keys().forEach((item) => {
     images[item.replace("./", "")] = r(item);
   });
   return images;
@@ -25,40 +25,55 @@ const Card = ({
   legendary,
   favorites,
   setFavorites,
-  refreshFavorites,
   userLoggedIn,
 }) => {
-  const addToFavorite = () => {
+  const addToFavorite = async () => {
+    console.log(userLoggedIn);
     const pokemon = favorites.find((favorite) => favorite.id === id);
 
     if (pokemon) {
       const updatedFavorites = favorites.filter(
         (favorite) => favorite !== pokemon
       );
-      setFavorites(updatedFavorites);
-      refreshFavorites();
 
-      userLoggedIn
-        ? axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
+      if (userLoggedIn) {
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/pokemons`,
+          {
             pokemons: updatedFavorites,
-          })
-        : localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    } else {
-      const updatedFavorites = [...favorites, { id, name }];
-      setFavorites(updatedFavorites);
-      userLoggedIn
-        ? axios.post(`${process.env.REACT_APP_SERVER_URL}/pokemons`, {
-            pokemons: updatedFavorites,
-          })
-        : localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+          }
+        );
+        return setFavorites(data);
+      }
+
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      return setFavorites(updatedFavorites);
     }
+
+    const updatedFavorites = [...favorites, { id, name }];
+    setFavorites(updatedFavorites);
+
+    if (userLoggedIn) {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/pokemons`,
+        {
+          pokemons: updatedFavorites,
+        }
+      );
+      return setFavorites(data);
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
   };
 
   return (
     <div
       className={style.card}
       style={{
-        border: `10px solid ${legendary ? "#d8d8d8" : "rgb(247, 223, 13)"}`,
+        border: `10px solid ${
+          legendary ? " rgb(192, 192, 192)" : "rgb(227 210 177)"
+        }`,
       }}
     >
       <div className={style.header}>

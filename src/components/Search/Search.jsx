@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import style from "./Search.module.css";
 
 const Search = ({ favorites }) => {
   const [pokemon, setPokemon] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const pokemonName = (event) => {
@@ -20,14 +20,14 @@ const Search = ({ favorites }) => {
         (favorite) =>
           pokemon.toLowerCase() === favorite.name || +pokemon === favorite.id
       )
-        ? history.push(`/favorites/${pokemon.toLowerCase()}`)
+        ? navigate(`/favorites/${pokemon.toLowerCase()}`)
         : alert(
             `You have not catched ${pokemon[0].toUpperCase()}${pokemon.slice(
               1
             )} yet`
           );
     } else {
-      history.push(`/pokemon/${pokemon.toLowerCase()}`);
+      navigate(`/pokemon/${pokemon.toLowerCase()}`);
     }
 
     setTimeout(() => setPokemon(""), 300);
