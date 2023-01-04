@@ -72,7 +72,7 @@ const Card = ({
       className={style.card}
       style={{
         border: `10px solid ${
-          legendary ? " rgb(192, 192, 192)" : "rgb(227 210 177)"
+          legendary ? "rgb(212, 181, 55)" : "rgb(192, 192, 192)"
         }`,
       }}
     >

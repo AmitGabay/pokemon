@@ -9,9 +9,9 @@
   align-items: center;
   margin: 35px 40px;
   border-radius: 4px;
-  border: 10px solid rgb(247, 223, 13);
+  border: 10px solid rgb(192, 192, 192);
   padding: 10px 20px;
-  background-color: antiquewhite;
+  background-color: #fae2de;
   width: 400px;
   height: 355px;
   box-sizing: border-box;
@@ -48,12 +48,13 @@
 .input {
   border-radius: 4px;
   padding: 7px;
+  border: 1px solid rgb(186, 184, 184);
 }
 
 .btn {
   border-radius: 4px;
-  border: 2px solid rgb(186, 184, 184);
-  background-color: rgb(253, 212, 206);
+  border: 1px solid rgb(186, 184, 184);
+  background-color: #fae2de;
   margin: 0 0 30px;
   padding: 5px;
   cursor: pointer;
